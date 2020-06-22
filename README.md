@@ -1,23 +1,41 @@
-## Script Analysis of 'Friends', popular American television sitcom
+# Build ChatBot to talk with 'Friends'
 
 
-## Introduction
+## Introduction 
 
 
-Hello, Friends fans!!!
+Hello!!!
+
+
+I just started learning Python by myself, so I'm still a beginner.
+
+
+Now I'm trying to build a chatbot with Python3 to have a fun. 
+It will help to improve my skills, although it will take me a very long time to complete.
+
+
+Give it a try!
+
+
+My goal is to make a simple chatbot that talks as if it were one of 'Friends'. 
+Because I am a fan of 'Friends', popular American television sitcom.
 
 
 I am a fan of 'Friends' and a beginner in Python.
 Here I will practice my Python skills and develop the script analysis by Python3. 
 
 
-All the resources of the scripts used here are provided by Crazy For Friends.           Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
+All the resources of the scripts of 'Friends' are provided by Crazy For Friends.           Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
 
 
-## Section 1
+## 1. Crawl and Scrape
 
 
-First step: Get the contents of the scripts divided into episodes on each page.
+Get the contents of the scripts and store them in a local folder by each of the episodes.
+
+
+## 2. Learning NLTK(Natural Language Toolkit) for Natural Language Processing(NLP)
+
 
 
 ## Conclusion
