@@ -21,11 +21,9 @@ My goal is to make a simple chatbot that talks as if it were one of 'Friends'.
 Because I am a fan of 'Friends', popular American television sitcom.
 
 
-I am a fan of 'Friends' and a beginner in Python.
-Here I will practice my Python skills and develop the script analysis by Python3. 
+All the resources of the scripts of 'Friends' are provided by Crazy For Friends.
 
-
-All the resources of the scripts of 'Friends' are provided by Crazy For Friends.           Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
+Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
 
 
 ## 1. Crawl and Scrape
