@@ -28,8 +28,19 @@ Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
 
 ## 1. Crawl and Scrape
 
+### "[grab-webcontents.py](grab-webcontents.py)"
+- Get the contents of the scripts from [the resource site](http://www.livesinabox.com/friends/scripts.shtml). 
+- Store them in a local directory assigned by an argument.
+ 
 
-Get the contents of the scripts and store them in a local folder by each of the episodes.
+### Usage: python3 grab-webcontents.py [dir_path=.scripts] 
+Default directory is '.scripts'
+
+
+'''bash
+python3 grab-webcontents.py .scripts
+'''
+
 
 
 ## 2. Learning NLTK(Natural Language Toolkit) for Natural Language Processing(NLP)
