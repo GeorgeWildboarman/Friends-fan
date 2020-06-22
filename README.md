@@ -28,18 +28,18 @@ Resource website URL: http://www.livesinabox.com/friends/scripts.shtml
 
 ## 1. Crawl and Scrape
 
-### "[grab-webcontents.py](grab-webcontents.py)"
+[grab-webcontents.py](grab-webcontents.py)
 - Get the contents of the scripts from [the resource site](http://www.livesinabox.com/friends/scripts.shtml). 
 - Store them in a local directory assigned by an argument.
  
 
-### Usage: python3 grab-webcontents.py [dir_path=.scripts] 
-Default directory is '.scripts'
+Usage: python3 grab-webcontents.py [dir_path=.scripts] 
+dir_path is direcory path and default is '.scripts'.
 
 
-'''bash
+```bash
 python3 grab-webcontents.py .scripts
-'''
+```
 
 
 
