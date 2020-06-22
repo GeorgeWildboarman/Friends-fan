@@ -8,7 +8,7 @@ All the resources of the scripts are provided by Crazy For Friends.
 
 The resources are divided into each episode.
 
-usage: grab-webcontents.py [directory name]
+usage: grab-webcontents.py [dir_path='.scripts']
 
 
 '''
@@ -47,24 +47,28 @@ links = [urljoin(url,lnk.get('href')) for lnk in atags
 
 # Create a directory to store all the script contents in it.
 if len(sys.argv)>1:
-    dr = sys.argv[1]
+    dir_path = sys.argv[1]
 else:
-    dr = '.scripts'
-print('Created Directory: ',dr)
-os.makedirs(dr, exist_ok=True)
+    dir_path = '.scripts' # Default directory
+
+if not os.path.isdir(dir_path):
+    print('Created new directory: ',dir_path)
+    os.makedirs(dir_path, exist_ok=True)
+else:
+    print('Directory of \"{}\" already exits.'.format(dir_path))
+
 
 # Assign file names by each of the episodes.
-paths = [os.path.join(dr,os.path.basename(p)) for p in links]
+paths = [os.path.join(dir_path,os.path.basename(p)) for p in links]
 
 #for p in paths: print(p)
 #print(len(paths))
 
 # Write the contents in local files by each of the episodes.
-#print(links[0])
-#print(paths[0])
-#for i in range(1):
-for i in range(len(links)):
+epis = len(links)
+print('Number of episodes: ',epis)
+for i in range(epis):
     with open(paths[i],'wt') as fw:
         fw.write( requests.get(links[i], timeout=60, headers=headers).text )
-
+    print('#{}: Saved in file of \"{}\"'.format(i,paths[i]))
 
