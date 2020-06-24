@@ -68,7 +68,10 @@ paths = [os.path.join(dir_path,os.path.basename(p)) for p in links]
 epis = len(links)
 print('Number of episodes: ',epis)
 for i in range(epis):
-    with open(paths[i],'wt') as fw:
-        fw.write( requests.get(links[i], timeout=60, headers=headers).text )
+    # Grab the content of episode.
+    resp = requests.get(links[i], timeout=60, headers=headers)
+    print(links[i])
+    with open(paths[i],'wb') as fw:
+        fw.write( resp.content )
     print('#{}: Saved in file of \"{}\"'.format(i,paths[i]))
 
