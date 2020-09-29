@@ -43,7 +43,31 @@ python3 grab-webcontents.py .scripts
 
 
 
-## 2. Learning NLTK(Natural Language Toolkit) for Natural Language Processing(NLP)
+## 2. Natural Language Processing with Tensorflow
+
+### Installation of Tensorflow from Anaconda
+- Create virtual environment for Tensorflow with Python3.6 or Python3.7
+- Open Anaconda Powershell
+
+```bash
+conda activate <virtual evironment name>
+conda upgrade -y --all
+conda clean -y --packages
+```
+for CPU
+```bash
+conda install -y tensorflow tensorflow-datasets
+```
+for GPU
+```bash
+conda install -y tensorflow-gpu tensorflow-datasets
+```
+Check Tensorflow version
+```bash
+python -c "import tensorflow as tf; print(tf.__version__)"
+```
+
+ 
 
 
 
