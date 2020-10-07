@@ -1,13 +1,14 @@
 #! /usr/bin/python3
 
-import re,string
+import re,string,os
 from bs4 import BeautifulSoup
 from nltk import word_tokenize
 from nltk import sent_tokenize
 from nltk.stem import WordNetLemmatizer
 
 # Path of  an example of html content for Morphological Analysis.
-path = '.scripts/809rumor.htm'
+filename = '.scripts/809rumor.htm'
+path = os.path.join(os.path.dirname(__file__),filename)
 
 def read_content(path):
     with open(path,'r',encoding='utf_8') as f:
@@ -65,8 +66,13 @@ def pre_process_raw_text(text):
     #text = text.lower() # convert to lowercase
 
     # Remove punctuation.
-    #remove_punct_dict = dict((ord(punct),None) for punct in string.punctuation)
+    # remove_punct_dict = dict((ord(punct),None) for punct in string.punctuation)
     remove_punct_dict = str.maketrans('','',string.punctuation+'’')
+
+    # pnct = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+    # remove_punct_dict = dict((ord(punct),None) for punct in pnct)
+    # remove_punct_dict = str.maketrans('','',pnct+'’')
+    
     #text = text.translate(remove_punct_dict) # remove punctuation
 
     #for i in range(len(text.split('\n'))):
@@ -86,10 +92,14 @@ text = retrieve_text(content)
 # Pre-processing raw text for normalize.
 text = pre_process_raw_text(text)
 
+# temp_file = os.path.join(os.path.dirname(__file__),'chk_temp_text.txt')
+# with open(temp_file,mode='w',encoding='utf_8') as fw:
+#     fw.write(text)
+
 # Tokenization of the text.
 tokens = word_tokenize(text) # convert to list of words
 
-# Normalize tokens by Lemmatization
+# # Normalize tokens by Lemmatization
 lemmatizer = WordNetLemmatizer()
 lemma = [lemmatizer.lemmatize(token) for token in tokens]
 for i in range(len(tokens)):
@@ -99,7 +109,7 @@ for i in range(len(tokens)):
 # ----------
 # Tokenization
 # ---------
-sent_tokens = sent_tokenize(text) # convert to list of sentences
+# sent_tokens = sent_tokenize(text) # convert to list of sentences
 #for s in sent_tokens: print('[ After tokenization for sentence ]\n',s,'\n')
 
 
