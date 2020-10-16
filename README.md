@@ -94,12 +94,12 @@ Raw text retrieved from wave site contains numbers, special characters, and othe
       Translated into:
       Two thousand dollars What do you think I am I soap opera star Yeah Thats right I am
 
-      ```python
-      import string
-      text = "Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That\'s right I am!"
-      punct_table = str.maketrans('','',string.punctuation)
-      text_translated = text.translate(punct_table)
-      ```
+    ```python
+    import string
+    text = "Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That\'s right I am!"
+    punct_table = str.maketrans('','',string.punctuation)
+    text_translated = text.translate(punct_table)
+    ```
 
       
 
@@ -113,26 +113,26 @@ Raw text retrieved from wave site contains numbers, special characters, and othe
   - Create virtual environment for Tensorflow with Python3.6 or Python3.7
   - Open Anaconda Powershell
 
-    ```bash
-        conda activate <virtual evironment name>
-        conda upgrade -y --all
-        conda clean -y --packages
-    ```
+```bash
+conda activate <virtual evironment name>
+conda upgrade -y --all
+conda clean -y --packages
+```
         
-    for CPU
-    ```bash
-        conda install -y tensorflow tensorflow-datasets
-    ```
+for CPU
+```bash
+conda install -y tensorflow tensorflow-datasets
+```
         
-    for GPU
-    ```bash
-        conda install -y tensorflow-gpu tensorflow-datasets
-    ```
+for GPU
+```bash
+conda install -y tensorflow-gpu tensorflow-datasets
+```
         
-    Check Tensorflow version
-    ```bash
-        python -c "import tensorflow as tf; print(tf.__version__)"
-    ```
+Check Tensorflow version
+```bash
+python -c "import tensorflow as tf; print(tf.__version__)"
+```
 
 ## Conclusion
 
