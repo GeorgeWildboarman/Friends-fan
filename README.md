@@ -94,12 +94,12 @@ Raw text retrieved from wave site contains numbers, special characters, and othe
       Translated into:
       Two thousand dollars What do you think I am I soap opera star Yeah Thats right I am
 
-    ```python
-    import string
-    text = "Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That\'s right I am!"
-    punct_table = str.maketrans('','',string.punctuation)
-    text_translated = text.translate(punct_table)
-    ```
+```python
+import string
+text = "Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That\'s right I am!"
+punct_table = str.maketrans('','',string.punctuation)
+text_translated = text.translate(punct_table)
+```
 
       
 
