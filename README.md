@@ -45,31 +45,92 @@ python3 grab-webcontents.py .scripts
 
 ## 2. Natural Language Processing with Tensorflow
 
+
+### Pre-process the raw text.
+    Raw text retrieved from wave site contains numbers, special characters, and others noise. In this process I remove charactors that can interfere with text analysis.
+
+  - Process for removing punctuation
+      string.punctuation is string of panctuation characters defined in string module.
+      The String of ASCII characters which are considered punctuation is shown by:
+      
+      ```python
+      import string
+      print('Punctuation Characters   : {}'.format( string.punctuation ))
+      # Punctuation Characters   : !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+      ```
+
+      But Characters of period are needed to be remain, and later traslated into <EOS>.
+      That's why a string of punctuation characters other than period is created.
+
+      ```python
+      my_punctuation = '!"#$%&\'()*+,-/:;<=>?@[\]^_`{|}~'
+      print('My Punctuation Characters: {}'.format( my_punctuation ))
+      # My Punctuation Characters: !"#$%&'()*+,-/:;<=>?@[\]^_`{|}~
+      ```
+
+      The string methode of str.maketrans() returns a translation table usable for str.translate().
+      The third argument is a string, whose characters will be mapped to None in the result.
+
+      ```python
+      punct_table = str.maketrans('','',string.punctuation)
+      ```
+
+      The result is the same as below:
+
+      ```python
+      punct_table = dict((ord(c),None) for c in string.punctuation)
+      ```
+      str.translate() returns a copy of the text in which each charactors are mapped through the given translation table.
+
+      ```python
+      text = text.translate(punct_table)
+      ```
+
+      e.g. 
+      Given the text:
+      Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That's right I am!
+      Translated into:
+      Two thousand dollars What do you think I am I soap opera star Yeah Thats right I am
+
+      ```python
+      import string
+      text = "Two thousand dollars!? What do you think I am? I soap opera star!? Yeah... That\'s right I am!"
+      punct_table = str.maketrans('','',string.punctuation)
+      text_translated = text.translate(punct_table)
+      ```
+
+      
+
+
+
+
+
+
+
 ### Installation of Tensorflow from Anaconda
-- Create virtual environment for Tensorflow with Python3.6 or Python3.7
-- Open Anaconda Powershell
+  - Create virtual environment for Tensorflow with Python3.6 or Python3.7
+  - Open Anaconda Powershell
 
-```bash
-conda activate <virtual evironment name>
-conda upgrade -y --all
-conda clean -y --packages
-```
-for CPU
-```bash
-conda install -y tensorflow tensorflow-datasets
-```
-for GPU
-```bash
-conda install -y tensorflow-gpu tensorflow-datasets
-```
-Check Tensorflow version
-```bash
-python -c "import tensorflow as tf; print(tf.__version__)"
-```
-
- 
-
-
+        ```bash
+        conda activate <virtual evironment name>
+        conda upgrade -y --all
+        conda clean -y --packages
+        ```
+        
+        for CPU
+        ```bash
+        conda install -y tensorflow tensorflow-datasets
+        ```
+        
+        for GPU
+        ```bash
+        conda install -y tensorflow-gpu tensorflow-datasets
+        ```
+        
+        Check Tensorflow version
+        ```bash
+        python -c "import tensorflow as tf; print(tf.__version__)"
+        ```
 
 ## Conclusion
 
