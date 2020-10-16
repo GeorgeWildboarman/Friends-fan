@@ -60,11 +60,11 @@ def pre_process_raw_text(rawtext):
     In this process I remove charactors that can interfere with text analysis.
     '''
     text = ''
-    # Remove excess lines and new line charactors
-    pattern = r'.+\s*:' #ex. "Rachel:"
+    # Remove excess lines and split lines by speaker
+    pattern = r'.+:' # ex. "Rachel:"
     for i,t in enumerate(rawtext.split('\n')[6:-6]):
         if re.search(pattern,t) and i!=0:
-            text += '\n'+t
+            text += ' \n'+t
         else:
             text += t
 
@@ -80,18 +80,16 @@ def pre_process_raw_text(rawtext):
     text = re.sub(pattern,'',text)
 
     # Remove or substitude characters that can interfere with text analysis.
-    pattern = r'(—|-|…|\.{3,})+?'
-    # pattern = r'(—|-|…)+?'
+    pattern = r'[—\-…“”»]|\.{2,}'
     text = re.sub(pattern,' ',text) # replace whit singl space
-    pattern = r'(“|”|»)+?'
-    text = re.sub(pattern,'',text) # remove
 
-    # Remove 'xxxxxxx:'
-    # Exp.
-    # "Chandler: That's what our friends call us." into " That's what our friends call us."
-    # pattern = r'\S+\s*:'
+    # The lines start with 'XXXXX:' which denotes who said and is annecessay for tokenization.
+    # e.g.
+    #  "Chandler: That's what our friends call us."
+    # Remove 'Chandler:' and reform into the new line:
+    #  "That's what our friends call us."
     pattern = r'.*:'
-    text = re.sub(pattern,'',text)
+    text = re.sub(pattern,' ',text)
 
     ### Process for converting contraction into full form ###
     text = text.replace(r"'",r"’")
@@ -110,28 +108,70 @@ def pre_process_raw_text(rawtext):
 
     ### Process for removing punctuation ###
 
-    # Panctuation characters defined in string module is:
-    # string.punctuation
-    # String of ASCII characters which are considered punctuation characters:
-    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
+    # string.punctuation is string of panctuation characters defined in string module.
+    # The string of ASCII characters which are considered punctuation characters:
+    # Punctuation Characters   : !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+    # But Characters of period are needed to be remain, and later traslated into <EOS>.
+    # That's why a string of punctuation characters other than period is created.
+    my_punctuation = '!"#$%&\'()*+,-/:;<=>?@[\]^_`{|}~'
     
     # The string methode of str.maketrans() returns a translation table usable for str.translate().
     # The third argument is a string, whose characters will be mapped to None in the result.
-    punct_table = str.maketrans('','',string.punctuation)
-    # The result is the same as below:
-    # punct_table = dict((ord(c),None) for c in string.punctuation)
+    punct_table = str.maketrans('','',string.my_punctuation)
     
     # str.translate() returns a copy of the str in which each charactors are mapped through the given translation table.
     text = text.translate(punct_table) 
-   
-    # Substitute multiple spaces with singl space.
-    pattern = r'\ +'
-    text = re.sub(pattern,' ',text)
 
-    # Remove excess new line charactor
-    pattern = r'((\n|\r|\n\r)+\s*)'
-    # pattern = r'(\n+)'
-    text = re.sub(pattern,r'\n',text)
+    # Remove characters of "‘" and "’"
+    pattern = r'[‘’]'
+    text = text = re.sub(pattern,' ',text)
+
+    # Remove single characters other than a, A, i, I, and new line characters
+    pattern = r'\s+([^aAiI\n\r]\s+)+'
+    text = text = re.sub(pattern,' ',text)
+
+    # Remove words that have no means
+    remove_words = 'ah,ha,haaa,hah,heh,hey,hi,huh,mm,mh,oh,ugh,uh,uhh,um,umm,wow'
+    for w in remove_words.split(','):
+        pattern = r'\s+(' + re.escape(w) + r'\s+)+'
+        text = re.sub(pattern,' ',text)
+
+    # Remove multiple "i" with singl
+    pattern = r' +(i +)+'
+    text = re.sub(pattern,' i ',text)
+
+    # Remove multiple "we" with singl
+    pattern = r' +(we +)+'
+    text = re.sub(pattern,' we ',text)
+
+    # Remove multiple "he" with singl
+    pattern = r' +(he +)+'
+    text = re.sub(pattern,' he ',text)
+
+    # Remove multiple "she" with singl
+    pattern = r' +(she +)+'
+    text = re.sub(pattern,' she ',text)
+
+    # Remove multiple "no" with singl
+    pattern = r' +(no +)+'
+    text = re.sub(pattern,' no ',text)
+
+    # Remove multiple "yes" with singl
+    pattern = r' +(yes +)+'
+    text = re.sub(pattern,' yes ',text)
+
+    # Remove multiple "<EOS>" with singl
+    pattern = r' +(\<EOS\> +)+'
+    text = re.sub(pattern,' <EOS> ',text)
+
+    # Remove numeric characters
+    pattern = r'\d'
+    text = text = re.sub(pattern,' ',text)
+
+    # Substitute multiple spaces with singl space.
+    pattern = r'\s+'
+    # pattern = r' +'
+    text = re.sub(pattern,' ',text)
 
     return text
 
