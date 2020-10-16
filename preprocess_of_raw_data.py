@@ -111,16 +111,20 @@ def pre_process_raw_text(rawtext):
     # string.punctuation is string of panctuation characters defined in string module.
     # The string of ASCII characters which are considered punctuation characters:
     # Punctuation Characters   : !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-    # But Characters of period are needed to be remain, and later traslated into <EOS>.
-    # That's why a string of punctuation characters other than period is created.
-    my_punctuation = '!"#$%&\'()*+,-/:;<=>?@[\]^_`{|}~'
+    # But Characters of period, quesion mark, and exclamation mark are needed to be remain, and later traslated into <EOS>.
+    # That's why a string of punctuation characters other than these is difined.
+    my_punctuation = '"#$%&\'()*+,-/:;<=>@[\]^_`{|}~'
     
     # The string methode of str.maketrans() returns a translation table usable for str.translate().
     # The third argument is a string, whose characters will be mapped to None in the result.
-    punct_table = str.maketrans('','',string.my_punctuation)
+    punct_table = str.maketrans('','',my_punctuation)
     
     # str.translate() returns a copy of the str in which each charactors are mapped through the given translation table.
     text = text.translate(punct_table) 
+ 
+    # Convert ".", "?", and "!" into <EOS>
+    pattern = r'[\.\?\!]'
+    text = re.sub(pattern,' <EOS> ',text)
 
     # Remove characters of "‘" and "’"
     pattern = r'[‘’]'
