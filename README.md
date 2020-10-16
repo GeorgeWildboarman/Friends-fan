@@ -47,7 +47,9 @@ python3 grab-webcontents.py .scripts
 
 
 ### Pre-process the raw text.
-    Raw text retrieved from wave site contains numbers, special characters, and others noise. In this process I remove charactors that can interfere with text analysis.
+Raw text retrieved from wave site contains numbers, special characters, and others noise. In this process I remove charactors that can interfere with text analysis.
+
+[preprocess_of_raw_data.py](preprocess_of_raw_data.py)
 
   - Process for removing punctuation
       string.punctuation is string of panctuation characters defined in string module.
@@ -111,26 +113,26 @@ python3 grab-webcontents.py .scripts
   - Create virtual environment for Tensorflow with Python3.6 or Python3.7
   - Open Anaconda Powershell
 
-        ```bash
+    ```bash
         conda activate <virtual evironment name>
         conda upgrade -y --all
         conda clean -y --packages
-        ```
+    ```
         
-        for CPU
-        ```bash
+    for CPU
+    ```bash
         conda install -y tensorflow tensorflow-datasets
-        ```
+    ```
         
-        for GPU
-        ```bash
+    for GPU
+    ```bash
         conda install -y tensorflow-gpu tensorflow-datasets
-        ```
+    ```
         
-        Check Tensorflow version
-        ```bash
+    Check Tensorflow version
+    ```bash
         python -c "import tensorflow as tf; print(tf.__version__)"
-        ```
+    ```
 
 ## Conclusion
 
