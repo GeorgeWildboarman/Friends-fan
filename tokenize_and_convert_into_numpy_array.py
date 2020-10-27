@@ -28,12 +28,6 @@ for root, dirs, files in os.walk(startpath, topdown=True):
         print('txt-file dir path: {}'.format(root))
         break
 
-# dir_path_for_txt = 'd:/gitsandbox/sentiment/.txt_data'
-# filename = '913sings.txt'
-# path = os.path.join(dir_path_for_txt,filename)
-
-# Open and read text files
-# path_list =[path]
 
 # Read preprosecced text files.
 print('Reading text files...')
@@ -49,14 +43,14 @@ for path in path_list:
 print('Tokenizing...')
 tokenizer = Tokenizer(num_words=num_words, filters='!"#$%&()*+,-./:;=?@[\\]^_`{|}~\t\n', oov_token='<OOV>',lower=False)
 
-# The fit_on_texts() method is used to encode the sentences.
+# The fit_on_texts() method is used to encode the words in sentences of text.
 tokenizer.fit_on_texts(sentences)
 print(f'The number of given sentences: {tokenizer.document_count}')
 
 # The word_index() method gives a dictionary of all key-value pairs where the key is the word in the sentence and the value is the label assigned to it.
 word_index = tokenizer.word_index
 
-# The full vocabulary size is given by the number of words in the dictionary plus one to pad the value of '0'.
+# The full vocabulary size is given by the number of words in the dictionary plus one, which is the value of '0' and used to pad out of words in sequence.
 vocab_size = len(word_index)+1
 num_words = min([vocab_size,num_words])
 print('Full vocabulary size: {}'.format(vocab_size))
